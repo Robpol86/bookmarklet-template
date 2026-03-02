@@ -1,6 +1,5 @@
 import dedent from "dedent";
 import fs from "node:fs";
-import postcss from "rollup-plugin-postcss";
 import terser from "@rollup/plugin-terser";
 
 /**
@@ -63,16 +62,6 @@ export default {
         name: "Bookmarklet",
     },
     plugins: [
-        // Embed imported CSS files into bookmarklet as javascript.
-        postcss({
-            inject: false,
-            minimize: true,
-            use: {
-                sass: {
-                    silenceDeprecations: ["legacy-js-api"], // https://github.com/egoist/rollup-plugin-postcss/issues/463
-                },
-            },
-        }),
         // Adjust these settings to reduce the size of the final bookmarklet.
         terser({
             compress: {

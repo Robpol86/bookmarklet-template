@@ -1,5 +1,4 @@
 import { defineConfig, globalIgnores } from "eslint/config";
-import css from "@eslint/css";
 import eslintPluginPackageJson from "eslint-plugin-package-json";
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 import globals from "globals";
@@ -20,14 +19,6 @@ export default defineConfig([
         files: ["**/*.js", "**/*.cjs", "**/*.mjs"],
         plugins: { js },
         extends: ["js/recommended"],
-    },
-    {
-        files: ["**/*.css"],
-        plugins: { css },
-        language: "css/css",
-        rules: {
-            "css/no-duplicate-imports": "error",
-        },
     },
     {
         files: ["**/*.json"],
