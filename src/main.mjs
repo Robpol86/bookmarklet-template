@@ -4,7 +4,6 @@
 
 import { Log } from "./log.mjs";
 
-
 /**
  * Main function.
  */
