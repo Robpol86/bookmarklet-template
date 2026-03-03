@@ -1,11 +1,11 @@
 /**
- * Convenience functions for logging.
+ * Convenience class for logging.
  */
 
 /**
  * Log messages to console with a project key and caller key.
  *
- * The use can filter log messages specific to the bookmarklet using the project key. The caller key is useful to quickly
+ * The user can filter log messages specific to the bookmarklet using the project key. The caller key is useful to quickly
  * pinpoint where the log message was emitted from.
  */
 export class Log {

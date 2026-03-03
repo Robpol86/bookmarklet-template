@@ -8,11 +8,11 @@ import { main } from "./main.mjs";
 /**
  * Entrypoint function of the bookmarklet.
  */
-async function entrypoint() {
+function entrypoint() {
     const log = new Log("entrypoint()");
     log.debug("Start");
     try {
-        return await main();
+        return main();
     } finally {
         log.debug("End");
     }
