@@ -21,6 +21,8 @@
     "dependencies": {
         "@rollup/plugin-terser": "^0.4.4",
         "dedent": "^1.7.0",
+        "estree-walker": "^3.0.3",
+        "magic-string": "^0.30.21",
         "rollup": "^4.53.3",
         "terser": "^5.44.0"
     },

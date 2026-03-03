@@ -1,6 +1,8 @@
+import MagicString from "magic-string";
 import dedent from "dedent";
 import fs from "node:fs";
 import terser from "@rollup/plugin-terser";
+import { walk } from "estree-walker";
 
 /**
  * Rollup plugin that outputs the bookmarklet as bookmarks HTML file with a favicon that the user can import.
@@ -53,6 +55,43 @@ function teeBookmarkletHtml({ icon, label, input, output } = {}) {
     };
 }
 
+/**
+ * Rollup plugin that replaces __FNAME_LINENO__ with "filename:line" at build time.
+ */
+function injectFNameLineNo() {
+    return {
+        name: "inject-caller-info",
+        transform(code, id) {
+            if (!code.includes("__FNAME_LINENO__")) return null; // fast path
+            const ast = this.parse(code);
+            const ms = new MagicString(code);
+            const filename = id.split("/").pop();
+
+            walk(ast, {
+                enter(node) {
+                    // Match: new Log(__FNAME_LINENO__)
+                    if (
+                        node.type === "NewExpression" &&
+                        node.callee.name === "Log" &&
+                        node.arguments.length === 1 &&
+                        node.arguments[0].type === "Identifier" &&
+                        node.arguments[0].name === "__FNAME_LINENO__"
+                    ) {
+                        const line = code.slice(0, node.start).split("\n").length;
+                        ms.overwrite(
+                            node.arguments[0].start,
+                            node.arguments[0].end,
+                            JSON.stringify(`${filename}:${line}`),
+                        );
+                    }
+                },
+            });
+
+            return { code: ms.toString(), map: ms.generateMap() };
+        },
+    };
+}
+
 // Main rollup config.
 export default {
     input: "src/entrypoint.mjs",
@@ -62,6 +101,8 @@ export default {
         name: "Bookmarklet",
     },
     plugins: [
+        // TODO
+        injectFNameLineNo(),
         // Adjust these settings to reduce the size of the final bookmarklet.
         terser({
             compress: {

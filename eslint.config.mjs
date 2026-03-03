@@ -12,6 +12,7 @@ export default defineConfig([
             globals: {
                 ...globals.browser,
                 ...globals.node,
+                __FNAME_LINENO__: "readonly",
             },
         },
     },
