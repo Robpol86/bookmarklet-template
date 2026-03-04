@@ -63,30 +63,18 @@ function injectFNameLineNo() {
         name: "inject-caller-info",
         transform(code, id) {
             if (!code.includes("__FNAME_LINENO__")) return null; // fast path
-            const ast = this.parse(code);
             const ms = new MagicString(code);
             const filename = id.split("/").pop();
+            const lines = code.split("\n");
 
-            walk(ast, {
-                enter(node) {
-                    // Match: log.debug(__FNAME_LINENO__, ...)  or  anyVar.debug(__FNAME_LINENO__, ...)
-                    if (
-                        node.type === "CallExpression" &&
-                        node.callee.type === "MemberExpression" &&
-                        node.callee.property.name === "debug" &&
-                        node.arguments.length >= 1 &&
-                        node.arguments[0].type === "Identifier" &&
-                        node.arguments[0].name === "__FNAME_LINENO__"
-                    ) {
-                        const line = code.slice(0, node.start).split("\n").length;
-                        ms.overwrite(
-                            node.arguments[0].start,
-                            node.arguments[0].end,
-                            JSON.stringify(`${filename}:${line}`),
-                        );
-                    }
-                },
-            });
+            for (let i = 0; i < lines.length; i++) {
+                let col = 0;
+                while ((col = lines[i].indexOf("__FNAME_LINENO__", col)) !== -1) {
+                    const start = lines.slice(0, i).join("\n").length + (i > 0 ? 1 : 0) + col;
+                    ms.overwrite(start, start + "__FNAME_LINENO__".length, JSON.stringify(`${filename}:${i + 1}`));
+                    col += "__FNAME_LINENO__".length;
+                }
+            }
 
             return { code: ms.toString(), map: ms.generateMap() };
         },
