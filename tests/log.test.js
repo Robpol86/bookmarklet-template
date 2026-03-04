@@ -1,42 +1,42 @@
 import { PROJECT_KEY, logDebug, logError, logInfo } from "../src/log.mjs";
 import { afterEach, beforeEach, describe, expect, jest, test } from "@jest/globals";
 
-describe("log", () => {
-    let errorSpy;
-    let logSpy;
-    let debugSpy;
+describe("log.mjs", () => {
+    let spyConsoleDebug;
+    let spyConsoleError;
+    let spyConsoleLog;
 
     beforeEach(() => {
-        errorSpy = jest.spyOn(console, "error").mockImplementation(() => {});
-        logSpy = jest.spyOn(console, "log").mockImplementation(() => {});
-        debugSpy = jest.spyOn(console, "debug").mockImplementation(() => {});
+        spyConsoleDebug = jest.spyOn(console, "debug").mockImplementation(() => {});
+        spyConsoleError = jest.spyOn(console, "error").mockImplementation(() => {});
+        spyConsoleLog = jest.spyOn(console, "log").mockImplementation(() => {});
     });
 
     afterEach(() => {
-        jest.restoreAllMocks();
+        jest.clearAllMocks();
     });
 
     describe("logError()", () => {
         test("calls console.error", () => {
-            logError("something went wrong");
-            expect(errorSpy).toHaveBeenCalledTimes(1);
+            logError("log message");
+            expect(spyConsoleError).toHaveBeenCalledTimes(1);
         });
 
         test("prefixes output with PROJECT_KEY", () => {
-            logError("something went wrong");
-            expect(errorSpy).toHaveBeenCalledWith(PROJECT_KEY, "something went wrong");
+            logError("log message");
+            expect(spyConsoleError).toHaveBeenCalledWith(PROJECT_KEY, "log message");
         });
 
         test("does not call console.log or console.debug", () => {
-            logError("something went wrong");
-            expect(logSpy).not.toHaveBeenCalled();
-            expect(debugSpy).not.toHaveBeenCalled();
+            logError("log message");
+            expect(spyConsoleLog).not.toHaveBeenCalled();
+            expect(spyConsoleDebug).not.toHaveBeenCalled();
         });
 
         test("passes additional arguments to console.error", () => {
             const err = new Error("boom");
-            logError("something went wrong", err, { context: 42 });
-            expect(errorSpy).toHaveBeenCalledWith(PROJECT_KEY, "something went wrong", err, { context: 42 });
+            logError("log message", err, { context: 42 });
+            expect(spyConsoleError).toHaveBeenCalledWith(PROJECT_KEY, "log message", err, { context: 42 });
         });
 
         test("works with no additional arguments", () => {
@@ -46,24 +46,24 @@ describe("log", () => {
 
     describe("logInfo()", () => {
         test("calls console.log", () => {
-            logInfo("started");
-            expect(logSpy).toHaveBeenCalledTimes(1);
+            logInfo("log message");
+            expect(spyConsoleLog).toHaveBeenCalledTimes(1);
         });
 
         test("prefixes output with PROJECT_KEY", () => {
-            logInfo("started");
-            expect(logSpy).toHaveBeenCalledWith(PROJECT_KEY, "started");
+            logInfo("log message");
+            expect(spyConsoleLog).toHaveBeenCalledWith(PROJECT_KEY, "log message");
         });
 
         test("does not call console.error or console.debug", () => {
-            logInfo("started");
-            expect(errorSpy).not.toHaveBeenCalled();
-            expect(debugSpy).not.toHaveBeenCalled();
+            logInfo("log message");
+            expect(spyConsoleError).not.toHaveBeenCalled();
+            expect(spyConsoleDebug).not.toHaveBeenCalled();
         });
 
         test("passes additional arguments to console.log", () => {
             logInfo("user loaded", { id: 7 }, "extra");
-            expect(logSpy).toHaveBeenCalledWith(PROJECT_KEY, "user loaded", { id: 7 }, "extra");
+            expect(spyConsoleLog).toHaveBeenCalledWith(PROJECT_KEY, "user loaded", { id: 7 }, "extra");
         });
 
         test("works with no additional arguments", () => {
@@ -74,23 +74,23 @@ describe("log", () => {
     describe("logDebug()", () => {
         test("calls console.debug", () => {
             logDebug("checkpoint reached");
-            expect(debugSpy).toHaveBeenCalledTimes(1);
+            expect(spyConsoleDebug).toHaveBeenCalledTimes(1);
         });
 
         test("prefixes output with PROJECT_KEY", () => {
             logDebug("checkpoint reached");
-            expect(debugSpy).toHaveBeenCalledWith(PROJECT_KEY, "checkpoint reached");
+            expect(spyConsoleDebug).toHaveBeenCalledWith(PROJECT_KEY, "checkpoint reached");
         });
 
         test("does not call console.error or console.log", () => {
             logDebug("checkpoint reached");
-            expect(errorSpy).not.toHaveBeenCalled();
-            expect(logSpy).not.toHaveBeenCalled();
+            expect(spyConsoleError).not.toHaveBeenCalled();
+            expect(spyConsoleLog).not.toHaveBeenCalled();
         });
 
         test("passes additional arguments to console.debug", () => {
             logDebug("state", { x: 1 }, [2, 3]);
-            expect(debugSpy).toHaveBeenCalledWith(PROJECT_KEY, "state", { x: 1 }, [2, 3]);
+            expect(spyConsoleDebug).toHaveBeenCalledWith(PROJECT_KEY, "state", { x: 1 }, [2, 3]);
         });
 
         test("works with no additional arguments", () => {
@@ -104,9 +104,9 @@ describe("log", () => {
             logInfo("i");
             logDebug("d");
 
-            expect(errorSpy.mock.calls[0][0]).toBe(PROJECT_KEY);
-            expect(logSpy.mock.calls[0][0]).toBe(PROJECT_KEY);
-            expect(debugSpy.mock.calls[0][0]).toBe(PROJECT_KEY);
+            expect(spyConsoleError.mock.calls[0][0]).toBe(PROJECT_KEY);
+            expect(spyConsoleLog.mock.calls[0][0]).toBe(PROJECT_KEY);
+            expect(spyConsoleDebug.mock.calls[0][0]).toBe(PROJECT_KEY);
         });
     });
 });
