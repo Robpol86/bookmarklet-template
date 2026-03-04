@@ -1,4 +1,3 @@
-import MagicString from "magic-string";
 import dedent from "dedent";
 import fs from "node:fs";
 import terser from "@rollup/plugin-terser";
@@ -62,20 +61,12 @@ function injectFNameLineNo(variable_name) {
         name: "inject-fname-lineno",
         transform(code, id) {
             if (!code.includes(variable_name)) return null;
-            const magicString = new MagicString(code);
             const filename = id.split("/").pop();
             const lines = code.split("\n");
-
-            for (let i = 0; i < lines.length; i++) {
-                let col = 0;
-                while ((col = lines[i].indexOf(variable_name, col)) !== -1) {
-                    const start = lines.slice(0, i).join("\n").length + (i > 0 ? 1 : 0) + col;
-                    magicString.overwrite(start, start + variable_name.length, JSON.stringify(`${filename}:${i + 1}`));
-                    col += variable_name.length;
-                }
-            }
-
-            return { code: magicString.toString(), map: magicString.generateMap() };
+            const replaced = lines.map((line, i) =>
+                line.replaceAll(variable_name, JSON.stringify(`${filename}:${i + 1}`)),
+            );
+            return { code: replaced.join("\n"), map: null };
         },
     };
 }
