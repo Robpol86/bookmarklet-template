@@ -61,7 +61,7 @@ function injectFNameLineNo(variable_name) {
     return {
         name: "inject-fname-lineno",
         transform(code, id) {
-            if (!code.includes(variable_name)) return null; // fast path
+            if (!code.includes(variable_name)) return null;
             const magicString = new MagicString(code);
             const filename = id.split("/").pop();
             const lines = code.split("\n");
