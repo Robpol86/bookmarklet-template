@@ -1,4 +1,4 @@
-# ![Logo](icons/favicon.png?raw=true "Logo") Bookmarklet-Template Template
+# ![Logo](icons/favicon.png?raw=true "Logo") Bookmarklet Template
 
 Boilerplate repo for browser bookmarklets.
 
