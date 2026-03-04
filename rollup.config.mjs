@@ -62,10 +62,9 @@ function injectFNameLineNo(variable_name) {
         transform(code, id) {
             if (!code.includes(variable_name)) return null;
             const filename = id.split("/").pop();
-            const lines = code.split("\n");
-            const replaced = lines.map((line, i) =>
-                line.replaceAll(variable_name, JSON.stringify(`${filename}:${i + 1}`)),
-            );
+            const replaced = code
+                .split("\n")
+                .map((line, idx) => line.replaceAll(variable_name, JSON.stringify(`${filename}:${idx + 1}`)));
             return { code: replaced.join("\n"), map: null };
         },
     };
