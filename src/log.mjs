@@ -1,52 +1,35 @@
 /**
- * Convenience class for logging.
+ * Logging functions.
  */
+
+const PROJECT_KEY = "BOOKMARKLET";
 
 /**
- * Log messages to console with a project key and caller key.
+ * Log an error.
  *
- * The user can filter log messages specific to the bookmarklet using the project key. The caller key is useful to quickly
- * pinpoint where the log message was emitted from.
+ * @param {string} message - Log message.
+ * @param {...*} args - Additional arguments passed to console.error().
  */
-export class Log {
-    #projectKey = "BOOKMARKLET";
+export function logError(message, ...args) {
+    console.error(PROJECT_KEY, message, ...args);
+}
 
-    /**
-     * Class constructor.
-     *
-     * @param {string} callerKey - Caller-provided key.
-     */
-    constructor(callerKey) {
-        this.callerKey = callerKey;
-    }
+/**
+ * Log an info message.
+ *
+ * @param {string} message - Log message.
+ * @param {...*} args - Additional arguments passed to console.log().
+ */
+export function logInfo(message, ...args) {
+    console.log(PROJECT_KEY, message, ...args);
+}
 
-    /**
-     * Log an error.
-     *
-     * @param {string} message - Log message.
-     * @param {...*} args - Additional arguments passed to console.error().
-     */
-    error(message, ...args) {
-        console.error(this.#projectKey, this.callerKey, message, ...args);
-    }
-
-    /**
-     * Log an info message.
-     *
-     * @param {string} message - Log message.
-     * @param {...*} args - Additional arguments passed to console.log().
-     */
-    info(message, ...args) {
-        console.log(this.#projectKey, this.callerKey, message, ...args);
-    }
-
-    /**
-     * Log a debug message.
-     *
-     * @param {string} message - Log message.
-     * @param {...*} args - Additional arguments passed to console.debug().
-     */
-    debug(message, ...args) {
-        console.debug(this.#projectKey, this.callerKey, message, ...args);
-    }
+/**
+ * Log a debug message.
+ *
+ * @param {string} message - Log message.
+ * @param {...*} args - Additional arguments passed to console.debug().
+ */
+export function logDebug(message, ...args) {
+    console.debug(PROJECT_KEY, message, ...args);
 }

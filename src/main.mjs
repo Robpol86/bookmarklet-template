@@ -2,15 +2,13 @@
  * The bookmarklet's main code.
  */
 
-import { Log } from "./log.mjs";
+import { logDebug } from "./log.mjs";
 
 /**
  * Main function.
  */
 export function main() {
-    const log = new Log("main()");
-
     // Show alert.
-    log.debug("Show alert");
+    logDebug(__FNAME_LINENO__, "Show alert");
     alert("Hello World");
 }

@@ -3,6 +3,23 @@ import fs from "node:fs";
 import terser from "@rollup/plugin-terser";
 
 /**
+ * Rollup plugin that replaces a specified variable name with "filename:line_number".
+ */
+function injectFNameLineNo(variable_name) {
+    return {
+        name: "inject-fname-lineno",
+        transform(code, id) {
+            if (!code.includes(variable_name)) return null;
+            const filename = id.split("/").pop();
+            const replaced = code
+                .split("\n")
+                .map((line, idx) => line.replaceAll(variable_name, JSON.stringify(`${filename}:${idx + 1}`)));
+            return { code: replaced.join("\n"), map: null };
+        },
+    };
+}
+
+/**
  * Rollup plugin that outputs the bookmarklet as bookmarks HTML file with a favicon that the user can import.
  */
 function teeBookmarkletHtml({ icon, label, input, output } = {}) {
@@ -62,6 +79,8 @@ export default {
         name: "Bookmarklet",
     },
     plugins: [
+        // Replace __FNAME_LINENO__ with "filename.mjs:123" for logging.
+        injectFNameLineNo("__FNAME_LINENO__"),
         // Adjust these settings to reduce the size of the final bookmarklet.
         terser({
             compress: {
