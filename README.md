@@ -5,10 +5,10 @@ Bookmarklet example repo with tests, multiple mjs source files, and compilation 
 <table>
     <tr>
         <td>
-            <figure>
+            <div align="center">
                 <img src="used-in-chrome-macos.png" alt="Used in Chrome on macOS" />
-                <figcaption>An elephant at sunset</figcaption>
-            </figure>
+                <em>An elephant at sunset</em>
+            </div>
         </td>
         <td><img src="used-in-firefox-macos.png" alt="Used in Firefox on macOS" /></td>
     </tr>
