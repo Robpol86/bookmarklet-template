@@ -5,24 +5,59 @@ Bookmarklet example repo with tests, multiple mjs source files, and compilation 
 <table>
     <tr>
         <td>
-            <div style="text-align: center">
+            <div align="center">
                 <img src="used-in-chrome-macos.png" alt="Used in Chrome on macOS" />
-                <em>An elephant at sunset</em>
+                <em>Used in Chrome on macOS</em>
             </div>
         </td>
-        <td><img src="used-in-firefox-macos.png" alt="Used in Firefox on macOS" /></td>
+        <td>
+            <div align="center">
+                <img src="used-in-firefox-macos.png" alt="Used in Firefox on macOS" />
+                <em>Used in Firefox on macOS</em>
+            </div>
+        </td>
     </tr>
     <tr>
-        <td><img src="used-in-safari-macos.png" alt="Used in Safari on macOS" /></td>
-        <td><img src="used-in-edge-win11.png" alt="Used in Edge on Windows 11" /></td>
+        <td>
+            <div align="center">
+                <img src="used-in-safari-macos.png" alt="Used in Safari on macOS" />
+                <em>Used in Safari on macOS</em>
+            </div>
+        </td>
+        <td>
+            <div align="center">
+                <img src="used-in-edge-win11.png" alt="Used in Edge on Windows 11" />
+                <em>Used in Edge on Windows 11</em>
+            </div>
+        </td>
     </tr>
     <tr>
-        <td><img src="used-in-chrome-iphone.png" alt="Used in Chrome on iPhone" /></td>
-        <td><img src="used-in-safari-iphone.png" alt="Used in Safari on iPhone" /></td>
+        <td>
+            <div align="center">
+                <img src="used-in-chrome-iphone.png" alt="Used in Chrome on iPhone" />
+                <em>Used in Chrome on iPhone</em>
+            </div>
+        </td>
+        <td>
+            <div align="center">
+                <img src="used-in-safari-iphone.png" alt="Used in Safari on iPhone" />
+                <em>Used in Safari on iPhone</em>
+            </div>
+        </td>
     </tr>
     <tr>
-        <td><img src="used-in-chrome-android.png" alt="Used in Chrome on Android" /></td>
-        <td><img src="used-in-firefox-android.png" alt="Used in Firefox on Android" /></td>
+        <td>
+            <div align="center">
+                <img src="used-in-chrome-android.png" alt="Used in Chrome on Android" />
+                <em>Used in Chrome on Android</em>
+            </div>
+        </td>
+        <td>
+            <div align="center">
+                <img src="used-in-firefox-android.png" alt="Used in Firefox on Android" />
+                <em>Used in Firefox on Android</em>
+            </div>
+        </td>
     </tr>
 </table>
 
