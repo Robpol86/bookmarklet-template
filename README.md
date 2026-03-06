@@ -2,6 +2,65 @@
 
 Bookmarklet example repo with tests, multiple mjs source files, and compilation into an IIFE.
 
+<table>
+    <tr>
+        <td width="50%">
+            <div align="center">
+                <img src="used-in-chrome-macos.png" alt="Used in Chrome on macOS" />
+                <em>Used in Chrome on macOS</em>
+            </div>
+        </td>
+        <td width="50%">
+            <div align="center">
+                <img src="used-in-firefox-macos.png" alt="Used in Firefox on macOS" />
+                <em>Used in Firefox on macOS</em>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div align="center">
+                <img src="used-in-safari-macos.png" alt="Used in Safari on macOS" />
+                <em>Used in Safari on macOS</em>
+            </div>
+        </td>
+        <td>
+            <div align="center">
+                <img src="used-in-edge-win11.png" alt="Used in Edge on Windows 11" />
+                <em>Used in Edge on Windows 11</em>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div align="center">
+                <img src="used-in-chrome-iphone.png" alt="Used in Chrome on iPhone" />
+                <em>Used in Chrome on iPhone</em>
+            </div>
+        </td>
+        <td>
+            <div align="center">
+                <img src="used-in-safari-iphone.png" alt="Used in Safari on iPhone" />
+                <em>Used in Safari on iPhone</em>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div align="center">
+                <img src="used-in-chrome-android.png" alt="Used in Chrome on Android" />
+                <em>Used in Chrome on Android</em>
+            </div>
+        </td>
+        <td>
+            <div align="center">
+                <img src="used-in-firefox-android.png" alt="Used in Firefox on Android" />
+                <em>Used in Firefox on Android</em>
+            </div>
+        </td>
+    </tr>
+</table>
+
 ## Install
 
 There are three ways to install the bookmarklet.
@@ -10,8 +69,8 @@ There are three ways to install the bookmarklet.
 
 ![Screenshot](install-html.png?raw=true "Screenshot")
 
-The best way to install this bookmarklet for **Chrome** is to import the bookmarks HTML file. This way the bookmarklet will
-have a favicon. Unfortunately the favicon doesn't show in other browsers.
+The best way to install this bookmarklet for **Chrome** and **Edge** is to import the bookmarks HTML file. This way the
+bookmarklet will have a favicon. Unfortunately the favicon doesn't show in other browsers.
 
 1. Download the latest `bookmarklet.html` from the [releases section](https://github.com/Robpol86/bookmarklet-template/releases)
 1. Import in Chrome:
