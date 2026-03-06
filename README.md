@@ -2,6 +2,14 @@
 
 Boilerplate repo for browser bookmarklets.
 
+<table>
+    <tr>
+        <td><img src="used-in-chrome-macos.png" alt="used in chrome macos" /></td>
+        <td><img src="used-in-firefox-macos.png" alt="used in firefox macos" /></td>
+        <td><img src="used-in-safari-macos.png" alt="used in safari macos" /></td>
+    </tr>
+</table>
+
 ## Install
 
 There are three ways to install the bookmarklet.
