@@ -1,6 +1,8 @@
 # ![Logo](icons/favicon.png?raw=true "Logo") Bookmarklet-Template
 
-Bookmarklet example repo with tests, multiple mjs source files, and compilation into an IIFE.
+Bookmarklet-Template is an example git repo that includes unit tests, linting, multiple modules (source files), and a
+compiler that compiles all modules into a single JavaScript IIFE. This is how I structure all my one-off bookmarklets. In
+this README I'll explain my design choices with several aspects of the project.
 
 <table>
     <tr>
@@ -60,6 +62,51 @@ Bookmarklet example repo with tests, multiple mjs source files, and compilation 
         </td>
     </tr>
 </table>
+
+## Features
+
+Some features I've included in this project are:
+
+* The project's source files are written in
+  [JavaScript module files](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) (*.mjs)
+* The project is "compiled" into an [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) `javascript:...` "URL"
+  using [Terser](https://Terser.org/) and [rollup](https://rollupjs.org/)
+    * Terser also minifies the JavaScript
+    * The IIFE ensures your bookmarklet code won't conflict with a webpage's code, whilst still giving you access to the
+      `document` and `window` objects
+* Tests are written for [jest](https://jestjs.io/) and [eslint](https://eslint.org/) is used for linting
+* An importable bookmarks HTML file is generated with a favicon for Chrome and Edge so users of those browsers can see an
+  icon for your bookmarklet
+
+## Directory Structure
+
+```gap
+├─ src/               # All bookmarklet code goes in this directory
+│  ├─ main.mjs        # Main file to place your code in
+│  ├─ log.mjs         # Example of how to split complex code into multiple files
+│  └─ entrypoint.mjs  # Tells Terser what to include in the output bookmarklet
+│
+├─ icons/
+│  └─ favicon.png
+│
+├─ tests/          # Tests are grouped by the file being tested
+│  └─ log.test.js
+│
+├─ .github/
+│  └─ workflows/
+│     ├─ ci.yml
+│     └─ release.yml  # Automatically adds compiled JS/HTML files to releases
+│
+├─ eslint.config.mjs
+├─ jest.config.mjs
+├─ jest.setup.mjs
+└─ rollup.config.mjs  # "Compiler" configuration
+```
+
+## Development
+
+For more information on developing a bookmarklet using this repo as a template read the [CONTRIBUTING.md](CONTRIBUTING.md)
+document.
 
 ## Install
 

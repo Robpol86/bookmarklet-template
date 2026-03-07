@@ -30,7 +30,7 @@ These are the steps a maintainer will take to make a new release.
 
 To make a new release:
 
-1. https://github.com/Robpol86/bookmarklet-template/releases
+1. https://github.com/Robpol86/Bookmarklet-Template/releases
 1. Draft a new release
 1. Tag > Create new tag > `vX.X.X`
 1. Set the release title
