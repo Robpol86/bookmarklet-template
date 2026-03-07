@@ -67,7 +67,8 @@ this README I'll explain my design choices with several aspects of the project.
 
 Some features I've included in this project are:
 
-* The project's source files are written in JavaScript module files (*.mjs)
+* The project's source files are written in
+  [JavaScript module files](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) (*.mjs)
 * The project is "compiled" into an [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) `javascript:...` "URL"
   using [Terser](https://Terser.org/) and [rollup](https://rollupjs.org/)
     * Terser also minifies the JavaScript
